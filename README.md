@@ -25,7 +25,7 @@ This scenario deploys both VPCs in the same region with VPC peering for connecti
 | vpc1_az | ap-northeast-1a | 
 | vpc2_az | ap-northeast-1c | 
 
-![](assets/2025-06-11_TF-single-VPC_multi-AZ.png)
+![](assets/2025-06-11_TF_single-region_VPC-peering.png)
 
 ### 2. Same Region, TGW Peering
 

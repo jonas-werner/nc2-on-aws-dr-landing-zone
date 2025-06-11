@@ -16,7 +16,7 @@ This Terraform configuration creates a landing zone for two NC2 clusters configu
 This scenario deploys both VPCs in the same region with VPC peering for connectivity.
 
 | tfvars variable | Setting | 
-|----------|-------------|---------|
+|----------|-------------|
 | vpc1_region | ap-northeast-1 | 
 | vpc2_region | ap-northeast-1 | 
 | vpc1_cidr | "10.101.0.0/16" | 
@@ -32,7 +32,7 @@ This scenario deploys both VPCs in the same region with VPC peering for connecti
 This scenario deploys both VPCs in the same region with VPC peering for connectivity.
 
 | tfvars variable | Setting | 
-|----------|-------------|---------|
+|----------|-------------|
 | vpc1_region | ap-northeast-1 | 
 | vpc2_region | ap-northeast-1 | 
 | vpc1_cidr | "10.101.0.0/16" | 
@@ -48,7 +48,7 @@ This scenario deploys both VPCs in the same region with VPC peering for connecti
 This scenario deploys VPCs in different regions with Transit Gateway peering for connectivity.
 
 | tfvars variable | setting | 
-|----------|-------------|---------|
+|----------|-------------|
 | vpc1_region | ap-northeast-1 | 
 | vpc2_region | ap-northeast-3 | 
 | vpc1_cidr | "10.101.0.0/16" | 
@@ -64,7 +64,7 @@ This scenario deploys VPCs in different regions with Transit Gateway peering for
 This scenario deploys VPCs in different regions with Transit Gateway peering for connectivity.
 
 | tfvars variable | setting | 
-|----------|-------------|---------|
+|----------|-------------|
 | vpc1_region | ap-northeast-1 | 
 | vpc2_region | ap-northeast-3 | 
 | vpc1_cidr | "10.101.0.0/16" | 

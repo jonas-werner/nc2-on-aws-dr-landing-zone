@@ -1,4 +1,4 @@
-# AWS VPC Network Configuration
+# AWS VPC Network Configuration for NC2 DR
 
 This Terraform configuration creates a landing zone for two NC2 clusters configured for Disaster Recovery. It comes with flexible configuration options allowing for single or multi-region with TGW or VPC peering. 
 

@@ -1,0 +1,8 @@
+project_prefix = "nc2"
+vpc1_region    = "ap-northeast-1"
+vpc2_region    = "ap-northeast-3"
+vpc1_cidr      = "10.101.0.0/16"
+vpc2_cidr      = "10.102.0.0/16"
+peering_type   = "tgw"
+vpc1_az        = "ap-northeast-1a"
+vpc2_az        = "ap-northeast-3a" 

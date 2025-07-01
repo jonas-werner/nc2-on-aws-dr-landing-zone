@@ -131,6 +131,38 @@ resource "aws_vpc_peering_connection_accepter" "vpc_peering_accepter" {
   }
 }
 
+# VPC Peering Routes
+resource "aws_route" "vpc1_to_vpc2" {
+  count                     = var.peering_type == "vpc" ? 1 : 0
+  route_table_id            = aws_vpc.vpc1.default_route_table_id
+  destination_cidr_block    = var.vpc2_cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering[0].id
+}
+
+resource "aws_route" "vpc2_to_vpc1" {
+  count                     = var.peering_type == "vpc" ? 1 : 0
+  provider                  = aws.vpc2
+  route_table_id            = aws_vpc.vpc2.default_route_table_id
+  destination_cidr_block    = var.vpc1_cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering[0].id
+}
+
+# VPC Peering Routes for Public Subnets
+resource "aws_route" "vpc1_public_to_vpc2" {
+  count                     = var.peering_type == "vpc" ? 1 : 0
+  route_table_id            = aws_route_table.vpc1_public.id
+  destination_cidr_block    = var.vpc2_cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering[0].id
+}
+
+resource "aws_route" "vpc2_public_to_vpc1" {
+  count                     = var.peering_type == "vpc" ? 1 : 0
+  provider                  = aws.vpc2
+  route_table_id            = aws_route_table.vpc2_public.id
+  destination_cidr_block    = var.vpc1_cidr
+  vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering[0].id
+}
+
 # Transit Gateway Configuration
 resource "aws_ec2_transit_gateway" "tgw1" {
   count = var.peering_type == "tgw" ? 1 : 0
@@ -233,6 +265,22 @@ resource "aws_route" "vpc2_to_tgw" {
   count                  = var.peering_type == "tgw" ? 1 : 0
   provider               = aws.vpc2
   route_table_id         = aws_vpc.vpc2.default_route_table_id
+  destination_cidr_block = var.vpc1_cidr
+  transit_gateway_id     = var.vpc1_region == var.vpc2_region ? aws_ec2_transit_gateway.tgw1[0].id : aws_ec2_transit_gateway.tgw2[0].id
+}
+
+# VPC Public Routes for TGW
+resource "aws_route" "vpc1_public_to_tgw" {
+  count                  = var.peering_type == "tgw" ? 1 : 0
+  route_table_id         = aws_route_table.vpc1_public.id
+  destination_cidr_block = var.vpc2_cidr
+  transit_gateway_id     = aws_ec2_transit_gateway.tgw1[0].id
+}
+
+resource "aws_route" "vpc2_public_to_tgw" {
+  count                  = var.peering_type == "tgw" ? 1 : 0
+  provider               = aws.vpc2
+  route_table_id         = aws_route_table.vpc2_public.id
   destination_cidr_block = var.vpc1_cidr
   transit_gateway_id     = var.vpc1_region == var.vpc2_region ? aws_ec2_transit_gateway.tgw1[0].id : aws_ec2_transit_gateway.tgw2[0].id
 } 

@@ -119,11 +119,13 @@ Each VPC contains:
 1. Configure variables in `terraform.tfvars`:
 ```hcl
 project_prefix = "nc2"
-vpc1_region    = "ap-northeast-1"
-vpc2_region    = "ap-northeast-1"  # or different region
+vpc1_region    = "ap-northeast-1" # can use same or different region for vpc 1 and 2
+vpc2_region    = "ap-northeast-1" # can use same or different region for vpc 1 and 2
 vpc1_cidr      = "10.101.0.0/16"
 vpc2_cidr      = "10.102.0.0/16"
 peering_type   = "vpc"  # or "tgw"
+vpc1_az        = "ap-northeast-1a" # align with regions for vpc1
+vpc2_az        = "ap-northeast-3a" # align with regions for vpc2
 ```
 
 2. Initialize and apply:
